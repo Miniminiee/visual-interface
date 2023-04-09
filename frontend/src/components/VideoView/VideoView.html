@@ -1,0 +1,58 @@
+<div id="videoview">
+    <div class="card">
+        <div class="card-header">
+            <div style="float: left; margin-left:10px; margin-top:6px;">
+                <h6 style="display: inline; user-select: none">仿真场景</h6>
+            </div>
+            <div style="float: right;">
+                <!-- <input type="button" value="得到时刻" v-on:click="getVidTime"/> -->
+                <!--v-on:click 点击后执行remoteAdd函数-->
+                <VueAmazingSelector
+                    :options="options"
+                    label="label"
+                    value="value"
+                    placeholder="请选择场景"
+                    :disabled="false"
+                    :width="120"
+                    :height="30"
+                    :num="6"
+                    allowClear
+                    v-model="selectedValue"
+                    @change="onChange" />
+            </div>
+        </div>
+        <!--
+        <div class="card-block" id="videoPlayerContainer">
+            <video id="my-player" ref="videoView" width="100%" height="100%" class="video-js vjs-big-play-centered">
+                 <source src="./test.mp4" type="video/mp4">
+            </video>
+            <div id="labelsContainer"></div>
+        </div>
+        -->
+        <div class="m-video" :class="{'u-video-hover': !vplay}" :style="`width: ${width}px; height: ${height}px;`">
+            <video
+              ref="veo"
+              :style="`object-fit: ${zoom};`"
+              :src="videoUrl"
+              :poster="videoCover"
+              :width="width"
+              :height="height"
+              :autoplay="autoplay"
+              :controls="!originPlay&&controls"
+              :loop="loop"
+              :muted="autoplay || muted"
+              :preload="preload"
+              @click.prevent.once="onPlay"
+              id="carvideo"
+              @canplay="getVidTime()"
+            >
+                <source src="./one.mp4" type="video/mp4">
+            </video>
+            <svg v-show="originPlay || showPlay" class="u-play" :class="{'hidden': vplay}" :style="`width: ${playWidth}px; height: ${playWidth}px;`" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"></path>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 12L9.75 8.75V15.25L15.25 12Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>

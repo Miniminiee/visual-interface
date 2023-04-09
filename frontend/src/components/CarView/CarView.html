@@ -1,0 +1,28 @@
+<div id="carview">
+    <div class="card">
+        <div class="card-header">
+            <h6 style="float: left;">宏观解释模块</h6>
+            <button
+                v-for="tab in tabs"
+                :key="tab"
+                :class="['tab-button', { active: currentTab === tab }]"
+                @click="currentTab = tab"
+                style="float: right;"
+              >
+            {{ tab }}
+            </button>
+            <div id="dynamic-component-demo" class="demo">
+                <component
+                    :is="currentTabComponent"
+                    class="tab"
+                    :data="propsData"
+                    :dataA="propsDataA"
+                    :dataB="propsDataB"
+                  ></component>
+            </div>
+        </div>
+        <div class="card-block" id="carContainer">
+             <div id="carGraph"></div>
+        </div>
+    </div>
+</div>
